@@ -1,0 +1,244 @@
+---
+title: "Example stereo-BRUV workflow"
+format: 
+  html:
+    self-contained: true
+editor: visual
+---
+
+# Loading and formatting the data
+
+### Install and load the necessary libraries
+
+The first time you use a package, you will have to install it. Turn on the hashed out lines below to run the code below (only needs to be run one time per device. All the other packages will need to be installed too, if you have not used them before.
+
+```{r}
+#| output: false
+#| warning: false
+
+# install.packages('remotes')
+library('remotes')
+options(timeout = 9999999)
+
+# remotes::install_github("GlobalArchiveManual/CheckEM")
+library(CheckEM)
+library(tidyverse)
+library(leaflet)
+library(pscl)
+library(here)
+```
+
+### Load the metadata
+
+This contains information such as the sample name (opcode), depth of the deployment and spatial information like latitude and longitude. In this example, the dataset contains multiple sampling campaigns, so we will filter it to only include a single campaign.
+
+```{r}
+metadata <- read.csv(here("data/tidy/south-west-corner-marine-park-western-arm_metadata.csv")) %>%
+  clean_names() %>%
+  dplyr::filter(campaignid %in% "2020-10_south-west_stereo-BRUVs",
+                successful_count %in% "Yes") %>%
+  glimpse()
+```
+
+### Load the count data
+
+This contains the abundance of each species per deployment. In this example dataset, some species have had MaxN (relative abundance) recorded for each sex, so we will summarise this data so that we just have one value for MaxN per species per deployment.
+
+```{r}
+count <- read.csv(here("data/tidy/south-west-corner-marine-park-western-arm_count.csv")) %>%
+  clean_names() %>%
+  dplyr::filter(campaignid %in% "2020-10_south-west_stereo-BRUVs") %>%
+  group_by(campaignid, sample, family, genus, species, scientific) %>%
+  dplyr::summarise(count = sum(count)) %>%
+  ungroup() %>%
+  glimpse()
+```
+
+### Load the habitat data
+
+This dataset contains the percentage cover of reef and mean relief per deployment. Your dataset might have additional habitat variables of interest (e.g. seagrass, sand).
+
+```{r}
+habitat <- read.csv(here("data/tidy/south-west-corner-marine-park-western-arm_habitat.csv")) %>%
+  clean_names() %>%
+  glimpse()
+```
+
+### Check the habitat and metadata
+
+Checking that things are as expected is extremely important when analysing data! Here we check the number of rows for the metadata and habitat datasets to check that these match.
+
+```{r}
+nrow(metadata)
+nrow(habitat)
+```
+
+And here we will see if there are any mismatches between the metadata and habitat. If you have any observations in the 'check_habitat' and 'check_metadata' dataframes, then you should open these up to see which samples are causing the issues. These are often from typos.
+
+```{r}
+check_habitat <- anti_join(metadata, habitat) %>%
+  glimpse()
+check_metadata <- anti_join(habitat, metadata) %>%
+  glimpse()
+```
+
+### Choose a species of interest
+
+Here we will filter the count (MaxN) data to only include a single species. We have chosen the Maori Wrasse (*Opthalmolepis lineolatus*) which is a highly abundant, reef-associated wrasse. We will also check the number of rows here - and notice that it is less than what we have in the metadata! This is because we have removed all of the **true zeros**, where we have successfully deployed a stereo-BRUV, but did not observe any Maori Wrasse. We will need to add these zeroes back in.
+
+```{r}
+maoriwrasse <- count %>%
+  dplyr::filter(scientific %in% "Labridae Ophthalmolepis lineolatus") %>%
+  glimpse()
+nrow(maoriwrasse)
+```
+
+### Add back zeroes
+
+Using the metadata and 'right_join', we can join back all the successful samples that didn't observe any Maori Wrasse, and then fill these rows with 0's in the count column. Have a read of the dplyr [mutating joins](https://dplyr.tidyverse.org/reference/mutate-joins.html), to understand the difference between left and right joins.
+
+```{r}
+maoriwrasse_w_zeros <- maoriwrasse %>%
+  right_join(metadata) %>%
+  left_join(habitat) %>%
+  dplyr::mutate(count = if_else(is.na(count), 0, count)) %>%
+  glimpse()
+nrow(maoriwrasse_w_zeros)
+```
+
+### Check the data
+
+It is always important to check your data at every stage. Using 'summary', we can check if the values we are getting are what we expect they should be, and we can also see if we have any NAs in our data. In this dataset, there are none, but if you have some in your data, 'summary' will count them.
+
+```{r}
+summary(maoriwrasse_w_zeros$count)
+summary(maoriwrasse_w_zeros$reef)
+summary(maoriwrasse_w_zeros$mean_relief)
+summary(maoriwrasse_w_zeros$depth_m)
+```
+
+# Visualising the data spatially using leaflet
+
+### Create interactive plots
+
+Leaflet is a great package to create interactive exploratory plots that can be scrolled and zoomed. The below code creates a gradient colour palette and then uses this to create a bubble plot, where the size of the bubble is relative to the MaxN of the Maori Wrasse, along with the colour of the bubble.
+
+```{r}
+pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = maoriwrasse_w_zeros$count)
+
+leaflet(maoriwrasse_w_zeros) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.WorldImagery") %>%
+  addCircleMarkers(~longitude_dd, ~latitude_dd, radius = ~count,
+                   color = ~pal(count),
+                   stroke = FALSE, label = ~as.character(sample),
+                   fillOpacity = 0.8) %>%
+  addLegend("bottomright",
+    pal = pal,
+    values = ~ count,
+    title = "Count",
+    opacity = 0.8)
+```
+
+We will use this code as a template to create a similar plot for other variables of interest, such as depth,
+
+```{r}
+pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = maoriwrasse_w_zeros$depth_m)
+
+leaflet(maoriwrasse_w_zeros) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.WorldImagery") %>%
+  addCircleMarkers(~longitude_dd, ~latitude_dd, radius = ~5,
+                   color = ~pal(depth_m),
+                   stroke = FALSE, label = ~as.character(sample),
+                   fillOpacity = 0.6) %>%
+  addLegend("bottomright",
+            pal = pal,
+            values = ~ depth_m,
+            title = "Count",
+            opacity = 0.8)
+```
+
+percentage cover of reef,
+
+```{r}
+pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = maoriwrasse_w_zeros$reef)
+
+leaflet(maoriwrasse_w_zeros) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.WorldImagery") %>%
+  addCircleMarkers(~longitude_dd, ~latitude_dd, radius = ~5,
+                   color = ~pal(reef),
+                   stroke = FALSE, label = ~as.character(sample),
+                   fillOpacity = 0.6) %>%
+  addLegend("bottomright",
+            pal = pal,
+            values = ~ reef,
+            title = "Count",
+            opacity = 0.8)
+```
+
+and mean relief.
+
+```{r}
+pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = maoriwrasse_w_zeros$mean_relief)
+
+leaflet(maoriwrasse_w_zeros) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.WorldImagery") %>%
+  addCircleMarkers(~longitude_dd, ~latitude_dd, radius = ~5,
+                   color = ~pal(mean_relief),
+                   stroke = FALSE, label = ~as.character(sample),
+                   fillOpacity = 0.6) %>%
+  addLegend("bottomright",
+            pal = pal,
+            values = ~ mean_relief,
+            title = "Count",
+            opacity = 0.8)
+```
+
+# Checking predictor variables and running a Generalized Linear Model (GLM)
+
+We are going to use Generalized Linear Models (GLMs) to model the abundance of Maori Wrasse. Firstly we need to decide which covariates to include in the model. We visualised depth, mean relief and the percentage cover of reef, however some of these looked very similar to each other. Multicollinearity is when independent variables in regression are correlated, so we should check this.
+
+### Plot correlation between variables
+
+Using ggplot, we can visualise the relationship between mean relief and reef, and they both seem to be highly positively correlated.
+
+```{r}
+ggplot() +
+  geom_point(data = maoriwrasse_w_zeros, aes(x = mean_relief, y = reef))
+```
+
+We can check this correlation, which shows that reef and mean relief are 95% positively correlated, and reef and depth are 72% negatively correlated. We will exclude mean relief from the analysis as it will likely cause issues with multicollinearity. For this example we will leave reef and depth, but you should do some reading and decide whether it is best practice to include variables that are this highly correlated.
+
+```{r}
+cor(maoriwrasse_w_zeros$mean_relief, maoriwrasse_w_zeros$reef)
+cor(maoriwrasse_w_zeros$reef, maoriwrasse_w_zeros$depth_m)
+```
+
+### Visualise data distribution
+
+Choosing the correct error distribution in our modelling is very important. Using the histogram below, we can see that our data is definitely not normally distributed, which rules out some families. All our values are integers (count data), but we have a lot of zeroes (zero inflated).
+
+```{r}
+hist(maoriwrasse_w_zeros$count)
+```
+
+### Run the model
+
+We will run a zero inflated poisson model using the 'pscl' package. You should do some reading to decide if you agree that this error distribution is the best to use in this scenario. We will also run some tests to check the model fit (AIC - smaller is better!) and get some summary statistics such as p values. We can see here that both depth and reef are highly significant.
+
+```{r}
+mod <- zeroinfl(count ~ depth_m + reef, data = maoriwrasse_w_zeros, dist = "poisson")
+AIC(mod)
+summary(mod)
+```
