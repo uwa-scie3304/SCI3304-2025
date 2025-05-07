@@ -16,11 +16,11 @@ The first time you use a package, you will have to install it. Turn on the hashe
 #| output: false
 #| warning: false
 
-# install.packages('remotes')
+#install.packages('remotes')
 library('remotes')
 options(timeout = 9999999)
 
-# remotes::install_github("GlobalArchiveManual/CheckEM")
+#remotes::install_github("GlobalArchiveManual/CheckEM")
 library(CheckEM)
 library(tidyverse)
 library(leaflet)
@@ -35,7 +35,7 @@ This contains information such as the sample name (opcode), depth of the deploym
 ```{r}
 metadata <- read.csv(here("data/tidy/south-west-corner-marine-park-western-arm_metadata.csv")) %>%
   clean_names() %>%
-  dplyr::filter(campaignid %in% "2020-10_south-west_stereo-BRUVs",
+  dplyr::filter(campaignid %in% "2020-10_south-west_stereo-BRUVs", #wont need for us
                 successful_count %in% "Yes") %>%
   glimpse()
 ```
