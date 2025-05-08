@@ -1,0 +1,70 @@
+sample,latitude_dd,longitude_dd,date_time,status,site,location,depth_m,successful_count,successful_length,observer_count,observer_length,forwards_habitat_image_saved,successful_habitat_forward,observer_habitat_forward,left_cam,right_cam,maxn_complete_date,maxn_checker,length_complete_date,Video location,comment
+R1,-35.0335,117.8682667,2025-04-23T10:38:00+08:00,fished,Rocky,Prince Harbour,3.2,Yes,Yes,Caelan McCuaig,Kayla Ferrera,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+R2,-35.0326,117.86735,2025-04-23T10:57:00+08:00,fished,Rocky,Prince Harbour,2.4,Yes,Yes,Khai Siang Tan,Darren Yap,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+R3,-35.03421667,117.8662333,2025-04-23T11:09:00+08:00,fished,Rocky,Prince Harbour,3.1,Yes,Yes,James Wijaya,Darren Yap,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+R4,-35.0373,117.8642833,2025-04-23T11:23:00+08:00,fished,Rocky,Prince Harbour,3.7,Yes,Yes,Ephraim Chang,Khai Siang Tan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+R5,-35.0387,117.8679333,2025-04-23T11:38:00+08:00,fished,Rocky,Prince Harbour,4.7,Yes,Yes,James Wijaya,Khai Siang Tan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+R6,-35.0412,117.86645,2025-04-23T11:51:00+08:00,fished,Rocky,Prince Harbour,3.8,Yes,Yes,Ephraim Chang,Darren Yap,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+R7,-35.042,117.8766,2025-04-23T12:04:00+08:00,fished,Rocky,Prince Harbour,3.9,No,No,James Wijaya,NIL,No,No,NIL,1207,1208,,,,,BRUV flipped upside down
+SF1,-35.0358,117.873,2025-04-23T13:08:00+08:00,fished,Salmon Farm,Prince Harbour,4.1,Yes,Yes,Ephraim Chang,Darren Yap,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF2,-35.0334,117.8746833,2025-04-23T12:56:00+08:00,fished,Salmon Farm,Prince Harbour,5.1,No,No,Erika Teng Gui,NIL,No,No,NIL,1207,1208,,,,,BRUV flipped upside down
+SF3,-35.0338,117.8744333,2025-04-23T13:21:00+08:00,fished,Salmon Farm,Prince Harbour,2.2,Yes,Yes,Riho Takishima,Evan Setiawan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF4,-35.0341,117.8762833,2025-04-23T13:33:00+08:00,fished,Salmon Farm,Prince Harbour,4.3,Yes,Yes,Riho Takishima,Darren Yap,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF5,-35.034,117.8777333,2025-04-23T13:44:00+08:00,fished,Salmon Farm,Prince Harbour,4.7,Yes,Yes,Riho Takishima,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF6,-35.0394,117.8843167,2025-04-23T14:01:00+08:00,fished,Salmon Farm,Prince Harbour,5.8,No,No,Erika Teng Gui,NIL,No,No,NIL,1207,1208,,,,,BRUV flipped upside down
+SF7,-35.0396,117.8826333,2025-04-23T14:13:00+08:00,fished,Salmon Farm,Prince Harbour,6.2,No,No,Erika Teng Gui,NIL,No,No,NIL,1207,1208,,,,,BRUV flipped upside down
+SF8,-35.0412,117.88161,2025-04-23T14:25:00+08:00,fished,Salmon Farm,Prince Harbour,4,Yes,Yes,Erika Teng Gui,Darren Yap,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF9,-35.0422,117.8795167,2025-04-23T14:36:00+08:00,fished,Salmon Farm,Prince Harbour,4.4,Yes,Yes,Riho Takishima,Darren Yap,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF10,-35.042,117.8835833,2025-04-23T14:48:00+08:00,fished,Salmon Farm,Prince Harbour,5.7,No,No,Erika Teng Gui,NIL,No,No,NIL,1207,1208,,,,,BRUV flipped upside down
+SF11,-35.0413,117.886,2025-04-23T14:59:00+08:00,fished,Salmon Farm,Prince Harbour,6.2,No,No,Erika Teng Gui,NIL,No,No,NIL,1207,1208,,,,,BRUV flipped upside down
+SF12,-35.0468,117.8993667,2025-04-23T15:14:00+08:00,fished,Salmon Farm,Prince Harbour,4.9,Yes,Yes,Erika Teng Gui,Darren Yap,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF13,-35.0572,117.9006667,2025-04-24T14:47:00+08:00,fished,Salmon Farm,Prince Harbour,3.8,No,No,Kayla Ferrera,NIL,No,No,NIL,1231,1232,,,,,BRUV flipped upside down
+SF14,-35.0586,117.8987333,2025-04-24T14:45:00+08:00,fished,Salmon Farm,Prince Harbour,3.7,Yes,Yes,Caelan McCuaig,Khai Siang Tan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF15,-35.0612,117.8969667,2025-04-24T14:34:00+08:00,fished,Salmon Farm,Prince Harbour,3.4,Yes,Yes,Darren Yap,Riho Takishima,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF16,-35.0574,117.8951167,2025-04-24T14:31:00+08:00,fished,Salmon Farm,Prince Harbour,3.2,Yes,Yes,Darren Yap,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+SF17,-35.0607,117.8916167,2025-04-24T15:02:00+08:00,fished,Salmon Farm,Prince Harbour,3,Yes,Yes,Caelan McCuaig,Darren Yap,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+SF18,-35.0674,117.8916167,2025-04-24T14:18:00+08:00,fished,Salmon Farm,Prince Harbour,2.2,No,No,Riho Takishima,NIL,No,No,NIL,1231,1232,,,,,BRUV flipped upside down
+SF19,-35.0616,117.8897333,2025-04-24T15:04:00+08:00,fished,Salmon Farm,Prince Harbour,3.7,Yes,Yes,Caelan McCuaig,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+SF20,-35.0686,117.8907833,2025-04-24T14:16:00+08:00,fished,Salmon Farm,Prince Harbour,1.3,Yes,Yes,Caelan McCuaig,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+YC1,-35.0545,117.8709833,2025-04-25T10:35:00+08:00,fished,Yacht Club,Prince Harbour,1.3,Yes,Yes,Evan Setiawan,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+YC2,-35.0543,117.8723167,2025-04-25T10:38:00+08:00,fished,Yacht Club,Prince Harbour,1.2,Yes,Yes,Evan Setiawan,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+YC3,-35.0554,117.8734167,2025-04-25T10:52:00+08:00,fished,Yacht Club,Prince Harbour,2.2,Yes,Yes,Darren Yap,Evan Setiawan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+YC4,-35.0556,117.87195,2025-04-25T10:48:00+08:00,fished,Yacht Club,Prince Harbour,1.8,Yes,Yes,Erika Teng Gui,Evan Setiawan,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+YC5,-35.0569,117.8722333,2025-04-25T11:06:00+08:00,fished,Yacht Club,Prince Harbour,1.8,Yes,Yes,Darren Yap,Evan Setiawan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+YC6,-35.0566,117.8739,2025-04-25T11:08:00+08:00,fished,Yacht Club,Prince Harbour,1.6,Yes,Yes,James Wijaya,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+YC7,-35.0582,117.8738333,2025-04-25T11:22:00+08:00,fished,Yacht Club,Prince Harbour,1.7,Yes,Yes,Darren Yap,Khai Siang Tan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,no fish
+YC8,-35.0584,117.8724667,2025-04-25T11:20:00+08:00,fished,Yacht Club,Prince Harbour,1.5,Yes,Yes,Erika Teng Gui,Evan Setiawan,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+YC9,-35.0592,117.8724,2025-04-25T11:35:00+08:00,fished,Yacht Club,Prince Harbour,1.1,Yes,Yes,Darren Yap,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+YC10,-35.0593,117.8742333,2025-04-25T11:38:00+08:00,fished,Yacht Club,Prince Harbour,1.6,Yes,Yes,Erika Teng Gui,NIL,Yes,Yes,Erika Teng Gui,1231,1232,,,,,no fish
+YC11,-35.0612,117.8747833,2025-04-25T12:01:00+08:00,fished,Yacht Club,Prince Harbour,1,Yes,Yes,Darren Yap,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+YC12,-35.0607,117.8736833,2025-04-25T11:58:00+08:00,fished,Yacht Club,Prince Harbour,1,Yes,Yes,Erika Teng Gui,Darren Yap,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+YC13,-35.0596,117.87595,2025-04-25T12:12:00+08:00,fished,Yacht Club,Prince Harbour,2.1,Yes,Yes,Evan Setiawan,Khai Siang Tan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,no fish
+YC14,-35.0603,117.8773,2025-04-25T12:14:00+08:00,fished,Yacht Club,Prince Harbour,1.2,Yes,Yes,Evan Setiawan,Darren Yap,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+S1,-35.0706,117.8915333,2025-04-24T14:01:00+08:00,fished,Sandy,Prince Harbour,1.2,Yes,Yes,Kayla Ferrera,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+S2,-35.07,117.8931833,2025-04-24T13:59:00+08:00,fished,Sandy,Prince Harbour,1.3,Yes,Yes,Riho Takishima,Erika Teng Gui,Yes,Yes,Caelan McCuaig,1231,1232,,,,,
+S3,-35.0701,117.9068167,2025-04-24T12:06:00+08:00,fished,Sandy,Prince Harbour,2.3,Yes,Yes,Darren Yap,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1231,1232,,,,L00462/R00429,
+S4,-35.07,117.909,2025-04-24T12:04:00+08:00,fished,Sandy,Prince Harbour,2.3,Yes,Yes,Kayla Ferrera,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+S5,-35.0706,117.9128,2025-04-24T11:36:00+08:00,fished,Sandy,Prince Harbour,2.6,Yes,Yes,Riho Takishima,Darren Yap,Yes,Yes,Caelan McCuaig,1231,1232,,,,,
+S6,-35.0718,117.9136,2025-04-24T11:34:00+08:00,fished,Sandy,Prince Harbour,2.5,Yes,Yes,Kayla Ferrera,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+S7,-35.0728,117.9126667,2025-04-24T11:24:00+08:00,fished,Sandy,Prince Harbour,2,Yes,Yes,Caelan McCuaig,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,right camera obstructed by seagrass
+S8,-35.0714,117.9109667,2025-04-24T11:49:00+08:00,fished,Sandy,Prince Harbour,2.6,Yes,Yes,Ephraim Chang,Evan Setiawan,Yes,Yes,Caelan McCuaig,1231,1232,,,,,
+S9,-35.0725,117.9104333,2025-04-24T11:50:00+08:00,fished,Sandy,Prince Harbour,2.6,Yes,Yes,Kayla Ferrera,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+S10,-35.0713,117.9023333,2025-04-24T13:28:00+08:00,fished,Sandy,Prince Harbour,2.3,Yes,Yes,Ephraim Chang,Darren Yap,Yes,Yes,Caelan McCuaig,1231,1232,,,,,
+S11,-35.0723,117.8995667,2025-04-24T13:44:00+08:00,fished,Sandy,Prince Harbour,1.7,Yes,Yes,Erika Teng Gui,Darren Yap,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+S12,-35.0733,117.9008,2025-04-24T13:41:00+08:00,fished,Sandy,Prince Harbour,1.7,Yes,Yes,James Wijaya,Darren Yap,Yes,Yes,Caelan McCuaig,1207,1208,,,,,
+S13,-35.0739,117.9035667,2025-04-24T13:01:00+08:00,fished,Sandy,Prince Harbour,1.3,Yes,Yes,Darren Yap,James Wijaya,Yes,Yes,Erika Teng Gui,1231,1232,,,,L00464&L00465/R00431&R00432,
+S14,-35.0725,117.90285,2025-04-24T13:31:00+08:00,fished,Sandy,Prince Harbour,2.4,Yes,Yes,Evan Setiawan,Ephraim Chang,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+S15,-35.0729,117.9050167,2025-04-24T13:14:00+08:00,fished,Sandy,Prince Harbour,2.2,Yes,Yes,Caelan McCuaig,Ephraim Chang,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+S16,-35.0713,117.9047833,2025-04-24T13:18:00+08:00,fished,Sandy,Prince Harbour,2.2,Yes,Yes,Kayla Ferrera,Darren Yap,Yes,Yes,Erika Teng Gui,1231,1232,,,,L00465/R00432,
+S17,-35.074,117.91255,2025-04-24T11:21:00+08:00,fished,Sandy,Prince Harbour,2.5,Yes,Yes,Darren Yap,Ephraim Chang,Yes,Yes,Erika Teng Gui,1231,1232,,,,L00460/R00427,
+S18,-35.0755,117.91245,2025-04-24T11:11:00+08:00,fished,Sandy,Prince Harbour,2.2,Yes,Yes,Khai Siang Tan,Darren Yap,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+S19,-35.0736,117.9104833,2025-04-24T11:08:00+08:00,fished,Sandy,Prince Harbour,2.1,Yes,Yes,Darren Yap,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,L00065&00066/R00069&00070,
+S20,-35.0773,117.9076333,2025-04-24T10:52:00+08:00,fished,Sandy,Prince Harbour,1.3,Yes,Yes,James Wijaya,Caelan McCuaig,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+S21,-35.0763,117.9083167,2025-04-24T10:54:00+08:00,fished,Sandy,Prince Harbour,1.7,Yes,Yes,Caelan McCuaig,James Wijaya,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+S22,-35.0741,117.9050833,2025-04-24T13:01:00+08:00,fished,Sandy,Prince Harbour,2,Yes,No,Darren Yap,NIL,Yes,Yes,Erika Teng Gui,1207,1208,,,,L00070&L00071/R00074&R00075,L00070 corrupted (R00074&R00075 used instead)
+S23,-35.0761,117.90425,2025-04-24T10:41:00+08:00,fished,Sandy,Prince Harbour,1.7,Yes,Yes,Caelan McCuaig,Erika Teng Gui,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+S24,-35.076,117.9028667,2025-04-24T10:38:00+08:00,fished,Sandy,Prince Harbour,1.5,Yes,Yes,Khai Siang Tan,James Wijaya,Yes,Yes,Erika Teng Gui,1231,1232,,,,,
+I1,-35.0406,117.9238056,2025-04-25T09:54:00+08:00,fished,Inlet,Prince Harbour,7.4,Yes,Yes,Ephraim Chang,Khai Siang Tan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+I2,-35.0412,117.9221167,2025-04-25T09:56:00+08:00,fished,Inlet,Prince Harbour,7.9,Yes,Yes,Erika Teng Gui,Khai Siang Tan,Yes,Yes,Erika Teng Gui,1231,1232,,,,,no fish
+I3,-35.0429,117.9229333,2025-04-25T10:08:00+08:00,fished,Inlet,Prince Harbour,8.6,Yes,Yes,Ephraim Chang,Khai Siang Tan,Yes,Yes,Erika Teng Gui,1207,1208,,,,,
+I4,-35.042,117.9231,2025-04-25T10:06:00+08:00,fished,Inlet,Prince Harbour,8.8,No,No,Erika Teng Gui,NIL,No,No,NIL,1231,1232,,,,,BRUV flipped upside down
