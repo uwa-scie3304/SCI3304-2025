@@ -158,3 +158,39 @@ mod2 <- zeroinfl(number ~ depth_m + sand, data = total.abund.w.habitat,
 AIC(mod1,mod2)
 
 summary(mod2)
+
+# with site as a factor
+total.abund.w.habitat <- total.abund.w.habitat %>%
+  dplyr::mutate(site = as.factor(site))%>%
+  glimpse()
+
+mixmod <- glm(number ~ depth_m + site, data=total.abund.w.habitat,
+              family = poisson)
+
+summary(mixmod)
+
+# random effect model (where you want to include a random effect to control for it
+# but you don't necessarily want to actually test it as a covariate)
+
+#install.packages(lme4)
+
+library(lme4)
+remod <- glmer(number ~ depth_m + (1|site), #(1|site) is specifying random effect
+                data=total.abund.w.habitat,
+                family = poisson)
+summary(remod)
+
+#you might also want to include date as a random effect to control
+#for differences in weather
+
+total.abund.w.habitat <- total.abund.w.habitat  %>%
+  dplyr::mutate(date = substr(date_time, 1, 10))%>%
+  dplyr::mutate(time = substr(date_time, 12, 19))%>%
+  dplyr::mutate(date = as.factor(date))%>%
+  glimpse()
+
+remod2 <- glmer(number ~ depth_m + (1|date),
+               data=total.abund.w.habitat,
+               family = poisson)
+
+summary(remod2)
