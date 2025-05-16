@@ -20,7 +20,9 @@ library(tidyverse)
 library(leaflet)
 library(pscl)
 library(here)
-
+library(ggplot2)
+#install.packages(lme4)
+library(lme4)
 
 ##Load metadata
 
@@ -35,7 +37,6 @@ count <- readRDS("./data/tidy/SCI3304-2025_complete.count.rds") %>%
 #load habitat data
 habitat <- readRDS("./data/tidy/SCI3304-2025_habitat.rds") %>%
   glimpse()
-
 
 ta.sr <- readRDS("./data/tidy/SCI3304-2025_ta.sr.rds")%>%
   glimpse()
@@ -63,6 +64,10 @@ total.abund <- ta.sr %>%
 total.abund.w.habitat <- total.abund %>%
   left_join(habitat) %>%
   filter(!sample == c("S7"))%>% #no habitat data
+  dplyr::mutate(date = substr(date_time, 1, 10))%>%
+  dplyr::mutate(time = substr(date_time, 12, 19))%>%
+  dplyr::mutate(date = as.factor(date))%>%
+  dplyr::mutate(site = as.factor(site))%>%
   glimpse()
 
 #check the data again
@@ -159,38 +164,76 @@ AIC(mod1,mod2)
 
 summary(mod2)
 
-# with site as a factor
-total.abund.w.habitat <- total.abund.w.habitat %>%
-  dplyr::mutate(site = as.factor(site))%>%
-  glimpse()
+# with site as a factor in the model (but no random effects) -- I would strongly
+# advise that you only use this glm() model to investigate relationships and not as your
+# final model testing as they don't include random effects
 
-mixmod <- glm(number ~ depth_m + site, data=total.abund.w.habitat,
+glm1 <- glm(number ~ depth_m + site, data=total.abund.w.habitat,
               family = poisson)
 
-summary(mixmod)
+summary(glm1)
+
+# having a look to see if there are differences in total abundance between sites
+
+glm2 <- glm(number~site, data = total.abund.w.habitat,
+            family = poisson)
+
+summary(glm2)
+AIC(glm1, glm2)
 
 # random effect model (where you want to include a random effect to control for it
 # but you don't necessarily want to actually test it as a covariate)
+# glmer() is from the package lme4
 
-#install.packages(lme4)
-
-library(lme4)
 remod <- glmer(number ~ depth_m + (1|site), #(1|site) is specifying random effect
-                data=total.abund.w.habitat,
+                data= total.abund.w.habitat,
                 family = poisson)
 summary(remod)
 
 #you might also want to include date as a random effect to control
 #for differences in weather
 
-total.abund.w.habitat <- total.abund.w.habitat  %>%
-  dplyr::mutate(date = substr(date_time, 1, 10))%>%
-  dplyr::mutate(time = substr(date_time, 12, 19))%>%
-  dplyr::mutate(date = as.factor(date))%>%
-  glimpse()
-
 remod2 <- glmer(number ~ depth_m + (1|date),
                data=total.abund.w.habitat,
                family = poisson)
 
 summary(remod2)
+
+remod3 <- glmer(number ~ turf + (1|date),
+                data=total.abund.w.habitat,
+                family = poisson)
+
+summary(remod3)
+
+plot(number ~ turf, data = total.abund.w.habitat)
+
+
+# boxplot with error bars aka. dynamite plot
+ggplot(total.abund.w.habitat, aes(x = site, y = sand)) +
+  stat_summary(fun = mean, geom = "bar", width = 0.6) +  # Bar plot with mean
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.5, color = "black") +  # SE as error bars
+  #labs(x = "x label", y = "y label") +
+  theme(legend.position = "none")
+
+
+# boxplot with error bars aka. dynamite plot
+ggplot(total.abund.w.habitat, aes(x = site, y = number)) + #change x and y to visualise other variables
+  stat_summary(fun = mean, geom = "bar", width = 0.6) +  # Bar plot with mean
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.5, color = "black") +  # SE as error bars
+  #labs(x = "x label", y = "Total abundance +/- se") +
+  theme_minimal()+
+  theme(legend.position = "none")
+
+
+## strongly recommend including a random effect for site or date depending on
+#what your research question is
+glmer1 <- glmer(number ~ depth_m*posidonia + (1|site) + (1|date),
+               data = total.abund.w.habitat,
+               family = poisson)
+summary(glmer1)
+
+glmer2 <- glmer(number ~ depth_m*posidonia + (1|date),
+                data = total.abund.w.habitat,
+                family = poisson)
+
+AIC(glmer1, glmer2)
