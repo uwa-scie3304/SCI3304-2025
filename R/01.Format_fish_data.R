@@ -85,7 +85,6 @@ ta.sr <-  complete.count %>%
   dplyr::select(campaignid, sample, total_abundance, species_richness) %>%
   pivot_longer(cols = c("total_abundance", "species_richness"),
                names_to = "response", values_to = "number") %>%
-
   glimpse()
 
 saveRDS(ta.sr, file = here::here(paste0("data/tidy/",

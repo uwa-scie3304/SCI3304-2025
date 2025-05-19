@@ -12,6 +12,7 @@ rm(list = ls())
 
 # install.packages('remotes')
 library('remotes')
+
 options(timeout = 9999999)
 
 # remotes::install_github("GlobalArchiveManual/CheckEM")
@@ -45,7 +46,6 @@ ta.sr <- readRDS("./data/tidy/SCI3304-2025_ta.sr.rds")%>%
 nrow(metadata)
 
 nrow(habitat)
-
 
 #checking there arent any mismatched
 check_habitat <- anti_join(metadata, habitat) %>%
@@ -143,10 +143,10 @@ leaflet(total.abund.w.habitat) %>%
 ## Checking Predictor Variables and running a GLM
 #plot correlation between variables
 ggplot() +
-  geom_point(data = total.abund.w.habitat, aes(x = posidonia, y = turf))
+  geom_point(data = total.abund.w.habitat, aes(x = turf, y = depth_m))
 
 #check the correlation values between variables, try the other combinations yourselves
-cor(total.abund.w.habitat$posidonia, total.abund.w.habitat$turf)
+cor(total.abund.w.habitat$turf, total.abund.w.habitat$depth_m)
 
 #visualise data distribution to determine distribution family in model
 hist(total.abund.w.habitat$number) #lots of zeros so we use poisson
@@ -168,14 +168,21 @@ summary(mod2)
 # advise that you only use this glm() model to investigate relationships and not as your
 # final model testing as they don't include random effects
 
+glm0 <- glm(number ~ site, data = total.abund.w.habitat,
+            family = poisson)
+
+summary(glm0)
+
+
 glm1 <- glm(number ~ depth_m + site, data=total.abund.w.habitat,
               family = poisson)
 
 summary(glm1)
+AIC(glm0, glm1)
 
 # having a look to see if there are differences in total abundance between sites
 
-glm2 <- glm(number~site, data = total.abund.w.habitat,
+glm2 <- glm(number~ depth_m + posidonia, data = total.abund.w.habitat,
             family = poisson)
 
 summary(glm2)
@@ -189,6 +196,7 @@ remod <- glmer(number ~ depth_m + (1|site), #(1|site) is specifying random effec
                 data= total.abund.w.habitat,
                 family = poisson)
 summary(remod)
+AIC(glm1, remod)
 
 #you might also want to include date as a random effect to control
 #for differences in weather
@@ -198,14 +206,58 @@ remod2 <- glmer(number ~ depth_m + (1|date),
                family = poisson)
 
 summary(remod2)
+AIC(remod, remod2)
 
-remod3 <- glmer(number ~ turf + (1|date),
+remod3 <- glmer(number ~ turf + (1|site),
                 data=total.abund.w.habitat,
                 family = poisson)
 
 summary(remod3)
+AIC(remod, remod3)
 
 plot(number ~ turf, data = total.abund.w.habitat)
+
+remod4 <- glmer(number ~ depth_m + turf + (1|site),
+                data=total.abund.w.habitat,
+                family = poisson)
+
+summary(remod4)
+AIC(remod, remod4)
+
+remod5 <- glmer(number ~ depth_m + posidonia + (1|site),
+                data = total.abund.w.habitat,
+                family = poisson)
+summary(remod5)
+AIC(remod, remod5)
+
+remod6 <- glmer(number ~ depth_m + posidonia + (1|site) + (1|date),
+                data = total.abund.w.habitat,
+                family = poisson)
+
+summary(remod6)
+AIC(remod5, remod6)
+
+remod7 <- glmer(number ~ depth_m + posidonia + mean.relief + (1|site) + (1|date),
+                data = total.abund.w.habitat,
+                family = poisson)
+
+AIC(remod6, remod7)
+
+## strongly recommend including a random effect for site or date depending on
+#what your research question is
+glmer1 <- glmer(number ~ depth_m*posidonia + (1|site) + (1|date),
+               data = total.abund.w.habitat,
+               family = poisson)
+
+summary(glmer1)
+AIC(remod6, glmer1)
+
+glmer2 <- glmer(number ~ depth_m*posidonia + (1|site),
+                data = total.abund.w.habitat,
+                family = poisson)
+
+summary(glmer2)
+AIC(remod6, glmer2)
 
 
 # boxplot with error bars aka. dynamite plot
@@ -224,16 +276,11 @@ ggplot(total.abund.w.habitat, aes(x = site, y = number)) + #change x and y to vi
   theme_minimal()+
   theme(legend.position = "none")
 
+#
+plot(number ~ posidonia, data = total.abund.w.habitat)
 
-## strongly recommend including a random effect for site or date depending on
-#what your research question is
-glmer1 <- glmer(number ~ depth_m*posidonia + (1|site) + (1|date),
-               data = total.abund.w.habitat,
-               family = poisson)
-summary(glmer1)
+ggplot(total.abund.w.habitat, aes(x = posidonia, y = number)) +
+  geom_point()+
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
 
-glmer2 <- glmer(number ~ depth_m*posidonia + (1|date),
-                data = total.abund.w.habitat,
-                family = poisson)
-
-AIC(glmer1, glmer2)
