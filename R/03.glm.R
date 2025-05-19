@@ -282,5 +282,6 @@ plot(number ~ posidonia, data = total.abund.w.habitat)
 ggplot(total.abund.w.habitat, aes(x = posidonia, y = number)) +
   geom_point()+
   geom_smooth(method = "lm", se = TRUE)+
+  #labs(x = "x label", y = "Total abundance +/- se") +
   theme_minimal()
 
